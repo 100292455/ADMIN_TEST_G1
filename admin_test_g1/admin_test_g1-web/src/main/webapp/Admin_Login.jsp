@@ -39,14 +39,15 @@
 				
 					<form method = "post" action = "LoginServlet">
 						<div style="float: left; margin-right: 20px; margin-left: 20px; width: 160px">
-							<c:choose>
+							<!--<c:choose>
 								<c:when test="${not empty mensaje}">
 									<p class = "error">${mensaje}</p>
 								</c:when>
 								<c:otherwise>
-									<p>Iniciar sesion</p>
+									
 								</c:otherwise>
-							</c:choose>
+							</c:choose>-->
+							<p>Iniciar sesion</p>
 							<input type="text" name ="usuariologin" id="UsuarioLogin" style="margin-top: 20px; margin-bottom: 20px; width: 150px"
 				placeholder="Usuario"> 
 							<input type="password" name = "passwordlogin" id="ContraseniaLogin" style="margin-bottom: 20px; width: 150px"

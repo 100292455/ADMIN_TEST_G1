@@ -90,7 +90,7 @@ public class AltaPromocionesServlet extends HttpServlet {
 		String m = comprobarPromocion(nombrePromo, precio1, tipo_promocion1, fecha_fin);
 		if(promDao.buscarTodosLosPromociones().size()!=0){
 			mensaje = "Error al crear promocion. Ya existe una promocion.";
-			request.setAttribute("mensajePromociones", mensaje);
+			sesion.setAttribute("mensajePromociones", mensaje);
 		}
 		//Si la promocion a crear presenta todos los campos
 		else if (m .equals(null) || m .equals("")){
@@ -112,7 +112,7 @@ public class AltaPromocionesServlet extends HttpServlet {
 				if (tipoDescuento==0) {
 					if(descuento>0.7*precioInicial){
 						m="Error al crear promocion. El valor de la promocion es mayor que los beneficios que el profesor obtendria en el curso "+c.getDES_titulo();
-						request.setAttribute("mensajePromociones", m);
+						sesion.setAttribute("mensajePromociones", m);
 						break;
 					}
 					
@@ -133,7 +133,7 @@ public class AltaPromocionesServlet extends HttpServlet {
 				else{
 					if((descuento*0.01)*precioInicial>0.7*precioInicial){
 						m="Error al crear la promocion. El valor de la promocion es mayor que los beneficios que el profesor obtendria en el curso "+c.getDES_titulo();
-						request.setAttribute("mensajePromociones", m);
+						sesion.setAttribute("mensajePromociones", m);
 						break;
 					}
 					
@@ -171,7 +171,7 @@ public class AltaPromocionesServlet extends HttpServlet {
 		}else{
 			
 			mensaje = m;
-			request.setAttribute("mensajePromociones", mensaje);
+			sesion.setAttribute("mensajePromociones", mensaje);
 		}
 			
 			config2.getServletContext().getRequestDispatcher(pagina).forward(request, response);

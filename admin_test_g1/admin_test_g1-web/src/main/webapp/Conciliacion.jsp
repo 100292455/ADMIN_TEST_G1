@@ -8,7 +8,7 @@
 
 		<!-- Información sobre el documento -->
 	
-		<title>Practica TIW: Administracion - Administrar Destacados</title>
+		<title>Practica TIW: Administracion - Conciliacion</title>
 		<meta charset="UTF-8">
 		<meta name="keywords" content="e-learning, cursos">
 		<meta name="description" content="Adminsitracion de Web de cursos en linea">
@@ -27,7 +27,7 @@
 			
 			<header>
 			
-				<div class="AreaPersonal" style="color:white;">Administrar Cursos Destacados</div>
+				<div class="AreaPersonal" style="color:white;">Mostrar Conciliacion</div>
 			
 			</header>
 			
@@ -36,44 +36,30 @@
 	
 			<section> 
 			<c:choose>
-				<c:when test="${empty cursosDestacados }">
+				<c:when test="${empty matriculasBeneficio }">
 					<!-- cursosDestacados es un atributo metido en el request por eso no es necesario 
 					ponerle el prefijo param -->
-					<p class="error">Actualmente no hay cursos que destacar.</p>
+					<p class="error">.No hay ningun alumno matriculado en toda la web</p>
 				</c:when>
 				<c:otherwise>
-		 		<c:forEach items="${cursosDestacados }" var="curso"> 
-				<!-- recorremos todos los objetos de la coleccion cursosDestacados
-					y cada objeto devuelto lo asignamos a la variable curso -->
-				<ul style="list-style-type: none;">
-					<li id = "oferta-ejemplo${curso.ID_curso}">
-						<div class = "ofertas-descripcion">
-							<p class="oferta-titulo">ID de curso: ${curso.ID_curso}</p>
-							<p class = "ofertas-titulo">${curso.DES_titulo }</p>
-							<p class = "ofertas-empresa">Impartido por: <!-- TO-DO cambiar COD_prof por nombre del profesor -->${curso.profesor.nombre }</p>
-							<p class = "ofertas-resumen">${curso.DES_descripcion }</p>
-							<p class = "ofertas-tipo-contrato">${curso.horas } hrs.</p>
-							<p class = "ofertas-jornada">${curso.precio_final } euros.</p>
-							<c:choose>
-								<c:when test="${curso.TIPO_dificultad == 0 }">
-									<p class = "ofertas-salario">Nivel basico.</p>
-								</c:when>
-								<c:when test="${curso.TIPO_dificultad == 1 }">
-									<p class = "ofertas-salario">Nivel intermedio.</p>
-								</c:when>
-								<c:otherwise>
-									<p class = "ofertas-salario">Nivel avanzado.</p>
-								</c:otherwise>
-							</c:choose>
-						</div>
-						
-						<div class = "ofertas-edicion">
-							<a style="color:white; font-weight:bold"href="DestacaCurso?IdCurso=${curso.ID_curso}">DESTACAR</a>
-						</div>
-								
-					</li>
-				</ul>
-				</c:forEach> 
+				 <table>
+                <caption>Lista Conciliacion</caption>
+                <thead>
+                        <tr>
+                                <th>Nombre Profesor</th>
+                                <th>Curso</th>
+                                <th>Beneficio obtenido</th>
+                        </tr>
+                </thead>
+                <c:forEach items="${matriculasBeneficio }" var="matricula">
+                        <tr>
+                                <td><c:out value="${matricula.curso.profesor.nombre }"></c:out></td>
+                                <td><c:out value="${matricula.curso.DES_titulo }"></c:out></td>
+                                <td><c:out value="${matricula.beneficioProfe }"></c:out></td>
+                        </tr>
+                </c:forEach>
+       			 </table>
+       			 <c:out value="El beneficio total de la aplicacion es ${beneficioPortalTotal }"/>
 				</c:otherwise>
 			</c:choose>
 				<form action="Administracion" method="post">

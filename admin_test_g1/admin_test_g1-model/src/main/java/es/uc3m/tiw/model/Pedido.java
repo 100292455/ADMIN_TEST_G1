@@ -98,8 +98,8 @@ public class Pedido {
 		return ESTADO_conciliado;
 	}
 
-	public void setESTADO_conciliado(int eSTADO_conciliado) {
-		ESTADO_conciliado = eSTADO_conciliado;
+	public void setESTADO_conciliado(int ESTADO_conciliado) {
+		ESTADO_conciliado = ESTADO_conciliado;
 	}
 
 	public void setCurso(Curso curso) {

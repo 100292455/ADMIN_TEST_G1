@@ -21,6 +21,7 @@ import es.uc3m.tiw.model.Curso;
 import es.uc3m.tiw.model.Cupon;
 import es.uc3m.tiw.model.Pedido;
 import es.uc3m.tiw.model.Promocion;
+import es.uc3m.tiw.model.Matricula;
 import es.uc3m.tiw.model.Usuario;
 import es.uc3m.tiw.model.dao.CursoDAO;
 import es.uc3m.tiw.model.dao.CursoDAOImpl;
@@ -51,6 +52,7 @@ public class Admin_AdministradorServlet extends HttpServlet {
 	private CuponDAO cupDao;
 	private CursoDAO curDao;
 	private PedidoDAO pedDao;
+	private MatriculaDAOImpl matDao;
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		config2 = config;
@@ -58,6 +60,7 @@ public class Admin_AdministradorServlet extends HttpServlet {
 		curDao = new CursoDAOImpl(em, ut);
 		promDao = new PromocionDAOImpl(em, ut);
 		pedDao = new PedidoDAOImpl(em, ut);
+		matDao = new MatriculaDAOImpl(em, ut);
 
 	}
 	
@@ -127,21 +130,68 @@ public class Admin_AdministradorServlet extends HttpServlet {
 		if(filtro.equals("Conciliacion")){
 			pagina = ADMIN_CONCILIACION_JSP;
 			HttpSession sesion = request.getSession();	
+			ServletContext context = sesion.getServletContext();
 			/* Recuperar de DB -> PEDIDOS WHERE CONCILIACION = 0 */
 			Collection<Pedido> pedidosSinConciliar=pedDao.recuperarPedidosSinConciliar();
 			for (Pedido pedido : pedidosSinConciliar) {
 				pedido.getCOD_pago();
+				String cod_pedido = pedido.getCOD_pago();
 				/*Llamar a web service pasandole el codPago*/
+				int precioConciliado = (int) ws.ConciliarWSBanco(cod_pedido);
 				/*Recibo del banco el precio conciliado (99% del precio original del curso)*/
-				int precioConciliado = 2;
 				pedido.setESTADO_conciliado(1);
 				pedido.setImporteCobrado(precioConciliado);
 				
-				/*Procedo a conciliar (repartir beneficio)*/
-			}
-			//sesion.setAttribute("cursosDestacados", cursosDestacados);
+				try {
+					pedDao.modificarPedido(pedido);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				
-			config2.getServletContext().getRequestDispatcher(pagina).forward(request, response);	
+				/*Procedo a conciliar (repartir beneficio)*/
+				
+				//Comprobamos si hay promociones/cupones para este curso
+				double beneficioProfe;
+				double beneficioPortal;
+				double beneficioPortalTotal=0;
+				if (pedido.getCurso().getPrecio_inicial()==pedido.getCurso().getPrecio_final()) {
+					beneficioProfe = pedido.getCurso().getPrecio_inicial()*0.7;
+					beneficioPortal = pedido.getCurso().getPrecio_inicial()*0.3;
+				}
+				//hay promociones
+				else if (promDao.buscarTodosLosPromociones().size()!=0) {
+					beneficioProfe = pedido.getCurso().getPrecio_inicial()*0.7;
+					beneficioPortal = precioConciliado*0.3;
+				}
+				//hay cupones
+				else {
+					beneficioProfe = precioConciliado*0.7;
+					beneficioPortal = pedido.getCurso().getPrecio_inicial()*0.3;
+				}
+				
+				//Metemos los beneficios en Matricula
+				for (Matricula matricula : matDao.buscarTodosLosMatriculas()) {
+					//Cuando encuentra el curso en la tabla matricula
+					if (pedido.getCurso().getID_curso()==matricula.getCurso().getID_curso()) {
+						matricula.setBeneficioPortal(beneficioPortal);
+						matricula.setBeneficioProfe(beneficioProfe);
+						try {
+							matDao.modificarMatricula(matricula);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				beneficioPortalTotal=beneficioPortalTotal+beneficioPortal;
+				}
+			Collection<Matricula> matriculasBeneficio=matDao.buscarTodosLosMatriculas();
+			sesion.setAttribute("matriculasBeneficio", matriculasBeneficio);
+			sesion.setAttribute("beneficioPortalTotal", beneficioPortalTotal);
+			config2.getServletContext().getRequestDispatcher(pagina).forward(request, response);
+			
+			}
+				
+			
 		}
 		
 		else {

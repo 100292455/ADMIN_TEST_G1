@@ -110,7 +110,7 @@ public class AltaPromocionesServlet extends HttpServlet {
 				
 				
 				if (tipoDescuento==0) {
-					if(descuento>0.7*precioInicial){
+					if(descuento>0.3*precioInicial){
 						m="Error al crear promocion. El valor de la promocion es mayor que los beneficios que el profesor obtendria en el curso "+c.getDES_titulo();
 						sesion.setAttribute("mensajePromociones", m);
 						break;

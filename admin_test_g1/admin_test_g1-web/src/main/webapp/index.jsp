@@ -65,7 +65,7 @@
 						</button>
 					</div>
 				</form>
-				<form action="Administracion" method="post">				
+				<form action="Administracion" method="get">				
 					<div class="AceptarNuevo">
 						<input type="hidden" name="filtro" value="Conciliacion">
 						<button type="submit">

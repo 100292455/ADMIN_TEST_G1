@@ -59,7 +59,7 @@ public class PedidoDAOImpl implements PedidoDAO{
 	
 	@Override
 	public Collection<Pedido> recuperarPedidosSinConciliar() {
-		return em.createQuery("select p from Pedido p where ESTADO_conciliado=0",Pedido.class).getResultList();
+		return em.createQuery("select p from Pedido p where p.ESTADO_conciliado=0",Pedido.class).getResultList();
 	}
 
 }

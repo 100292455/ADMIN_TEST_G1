@@ -99,8 +99,8 @@ public class Admin_AdministradorServlet extends HttpServlet {
 				//Comprobamos si hay promociones/cupones para este curso
 				
 				if (pedido.getCurso().getPrecio_inicial()==pedido.getCurso().getPrecio_final()) {
-					beneficioProfe = pedido.getCurso().getPrecio_inicial()*0.7;
-					beneficioPortal = pedido.getCurso().getPrecio_inicial()*0.3;
+					beneficioProfe = pedido.getImporteCobrado()*0.7;
+					beneficioPortal = pedido.getImporteCobrado()*0.3;
 				}
 				//hay promociones
 				else if (promDao.buscarTodosLosPromociones().size()!=0) {
@@ -134,9 +134,7 @@ public class Admin_AdministradorServlet extends HttpServlet {
 			config2.getServletContext().getRequestDispatcher(pagina).forward(request, response);
 
 		}
-
-		config2.getServletContext().getRequestDispatcher(ADMIN_CONCILIACION_JSP).forward(request, response);	
-	}
+}
 
 
 	/**
@@ -247,9 +245,6 @@ public class Admin_AdministradorServlet extends HttpServlet {
 
 		}*/
 
-		else {
-			config2.getServletContext().getRequestDispatcher(pagina).forward(request, response);
-		}
 	}
 
 }

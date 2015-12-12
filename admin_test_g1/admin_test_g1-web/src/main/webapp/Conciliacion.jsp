@@ -59,7 +59,7 @@
                         </tr>
                 </c:forEach>
        			 </table>
-       			 <c:out value="El beneficio total de la aplicacion es ${beneficioPortalTotal }"/>
+       			 <c:out value="El beneficio total de la aplicacion es ${beneficioPortalTotal } en la ultima conciliacion"/>
 				</c:otherwise>
 			</c:choose>
 				<form action="Administracion" method="post">

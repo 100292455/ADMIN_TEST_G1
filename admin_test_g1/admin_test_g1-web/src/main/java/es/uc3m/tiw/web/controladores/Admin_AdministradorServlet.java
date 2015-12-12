@@ -53,6 +53,7 @@ public class Admin_AdministradorServlet extends HttpServlet {
 		promDao = new PromocionDAOImpl(em, ut);
 		pedDao = new PedidoDAOImpl(em, ut);
 		matDao = new MatriculaDAOImpl(em, ut);
+		ws = new AlumnoWSBanco();
 
 	}
 
@@ -81,7 +82,6 @@ public class Admin_AdministradorServlet extends HttpServlet {
 			Collection<Pedido> pedidosSinConciliar=pedDao.recuperarPedidosSinConciliar();
 			for (Pedido pedido : pedidosSinConciliar) {
 				String cod_pedido = pedido.getCOD_pago();
-				System.out.println(cod_pedido) ;
 				/*Llamar a web service pasandole el codPago*/
 				Double precioConciliado =  ws.ConciliarWSBanco(cod_pedido);
 				/*Recibo del banco el precio conciliado (99% del precio original del curso)*/

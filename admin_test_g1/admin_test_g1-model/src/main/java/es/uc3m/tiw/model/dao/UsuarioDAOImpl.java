@@ -65,9 +65,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	 * @see es.uc3m.tiw.daos.UsuarioDAO#recuperarUsuarioPorNombre(java.lang.String)
 	 */
 	@Override
-	public Usuario recuperarUsuarioPorNombre(String nombre) {
-		return em.createQuery("select u from Usuario u where u.nombre="+nombre, Usuario.class).getSingleResult();
+	public List<Usuario> recuperarUsuarioPorNombre(String nombre) {
+		return em.createQuery("select u from Usuario u where u.email='"+nombre+"'", Usuario.class).getResultList();
 	}
+	
 	@Override
 	public Usuario buscarPorEmailYpassword(String email,String clave)throws NoResultException{
 		return em.createQuery("select u from Usuario u where u.email='"+email+"' and u.clave='"+clave+"'",Usuario.class).getSingleResult();

@@ -4,14 +4,15 @@
  		<jta-data-source>jdbc/tiw</jta-data-source>
  		<class>es.uc3m.tiw.model.Cupon</class>
  		<class>es.uc3m.tiw.model.Curso</class>
+ 		<class>es.uc3m.tiw.model.Deseo</class>
  		<class>es.uc3m.tiw.model.Leccion</class>
  		<class>es.uc3m.tiw.model.Logro</class>
  		<class>es.uc3m.tiw.model.Matricula</class>
+ 		<class>es.uc3m.tiw.model.Mensaje</class>
+ 		<class>es.uc3m.tiw.model.Pedido</class>
  		<class>es.uc3m.tiw.model.Promocion</class>
  		<class>es.uc3m.tiw.model.Seccion</class>
  		<class>es.uc3m.tiw.model.Usuario</class>
- 		<class>es.uc3m.tiw.model.Pedido</class>
- 		<class>es.uc3m.tiw.model.Mensaje</class>
 		 <!-- la siguiente pdominiosce que se pueda actualizar las tablas automáticamente
                         si se realiza algún cambio en la clase Usuario, los valores posibles pueden verse aquí:
                         http://stackoverflow.com/questions/438146/hibernate-question-hbm2ddl-auto-possible-values-and-what-they-do -->

@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 		config2 = config;
 		usDao = new UsuarioDAOImpl(em, ut); 
 		promDao = new PromocionDAOImpl(em, ut);  
-		List<Usuario> aux = usDao.recuperarUsuarioPorNombre("miguel@uc3m.es");
+		List<Usuario> aux = usDao.recuperarUsuarioPorNombreLista("miguel@uc3m.es");
 		if(aux.isEmpty()){
 			Usuario usuario = new Usuario ( "Miguel", "Solera", 1, "miguel@uc3m.es", "descripcion", "intereses", "565543324", "VISA", 2, "1234");
 			try {

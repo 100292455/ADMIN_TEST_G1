@@ -16,11 +16,14 @@ public interface UsuarioDAO {
 
 	public abstract Usuario recuperarUsuarioPorPK(Long pk);
 
-	public abstract List<Usuario> recuperarUsuarioPorNombre(String nombre);
+	public abstract Usuario recuperarUsuarioPorNombre(String nombre);
+
+	public abstract Usuario buscarPorEmailYpassword(String email, String password);
 	
-	public abstract Usuario buscarPorEmailYpassword(String email,String clave);
+	public abstract Collection<Usuario> buscarPorEmail(String email);
 
 	public abstract Collection<Usuario> buscarTodosLosUsuarios();
-
+	
+	public abstract List<Usuario> recuperarUsuarioPorNombreLista(String nombre);
 
 }

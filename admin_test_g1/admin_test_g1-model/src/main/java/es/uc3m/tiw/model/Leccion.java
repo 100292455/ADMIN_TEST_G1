@@ -2,6 +2,7 @@ package es.uc3m.tiw.model;
 
 import static javax.persistence.GenerationType.AUTO;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,9 +19,7 @@ public class Leccion {
 	String titulo;
 	String descripcion;
 	String formato;
-	@OneToOne
 	Seccion seccion;
-	@OneToOne
 	Curso curso;
 	public Leccion() {
 		super();
@@ -37,11 +36,12 @@ public class Leccion {
 		this.curso = curso;
 		
 	}
-	public int getId_leccion() {
+	
+	public int getID_leccion() {
 		return ID_leccion;
 	}
-	public void setId_leccion(int ID_leccion) {
-		this.ID_leccion = ID_leccion;
+	public void setID_leccion(int iD_leccion) {
+		ID_leccion = iD_leccion;
 	}
 	public String getTitulo() {
 		return titulo;

@@ -4,10 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity
+@Table(name="curso")
 public class Cupon {
 
 	@Id

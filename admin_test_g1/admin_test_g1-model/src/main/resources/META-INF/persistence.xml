@@ -11,6 +11,7 @@
  		<class>es.uc3m.tiw.model.Seccion</class>
  		<class>es.uc3m.tiw.model.Usuario</class>
  		<class>es.uc3m.tiw.model.Pedido</class>
+ 		<class>es.uc3m.tiw.model.Mensaje</class>
 		 <!-- la siguiente pdominiosce que se pueda actualizar las tablas automáticamente
                         si se realiza algún cambio en la clase Usuario, los valores posibles pueden verse aquí:
                         http://stackoverflow.com/questions/438146/hibernate-question-hbm2ddl-auto-possible-values-and-what-they-do -->

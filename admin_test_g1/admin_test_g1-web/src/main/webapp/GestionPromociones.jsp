@@ -13,6 +13,7 @@
 		<meta name="keywords" content="e-learning, cursos">
 		<meta name="description" content="Web de cursos en linea">
 		<meta name="author" content="Jorge Garcia">
+		<link rel="stylesheet" type="text/css" href="./admin_css/empresa-mis-ofertas.css">
 		<link href="<c:url value="/admin_css/base.css" />" rel="stylesheet" type="text/css" >
 		<link href="<c:url value="/admin_css/usuario-contenido-curso.css" />" rel="stylesheet" type="text/css" >
 		<link href="<c:url value="/admin_css/empresa-mis-ofertas.css" />" rel="stylesheet" type="text/css" >
@@ -82,7 +83,10 @@
 									
 									<p class = "ofertas-titulo">${promocion.fecha_fin } fin de la promocion.</p>
 								</div>
-
+								<div class = "ofertas-edicion">
+							    	<img class="eliminar-icon" src="images/trash.png" alt="Error en la imagen">
+							    	<p class = "numero-seguidores"><a  href="BajaPromociones?IdPromocion=${promocion.id_promo}">Eliminar promocion.</a></p>
+						       	</div>
 							</li>
 						</c:forEach> 
 						</ul>				
